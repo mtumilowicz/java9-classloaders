@@ -77,6 +77,10 @@ by default - several classes did not need all permissions - they are de-privileg
     1. if not - `ClassNotFoundException`
     
 # project description
+1. java 9
+    ```
+    sourceCompatibility = 9
+    ```
 1. print all modules with classloaders
     ```
     ModuleLayer layer = ModuleLayer.boot();
