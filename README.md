@@ -21,6 +21,8 @@ When the JVM is started, three class loaders are used:
 * **Bootstrap class loader** - loads the core Java libraries located in the `<JAVA_HOME>/jre/lib` directory. 
     This class loader, which is part of the core JVM, is written in native code (mostly in `C`). Bootstrap 
     class loader don't have any parents.
+    * loads for example `Object` class
+    * represented by `null` in code (`Object.class.getClassLoader() == null`)
 * **Extensions class loader** - loads the code in the extensions directories (`<JAVA_HOME>/jre/lib/ext`, or 
     any other directory specified by the `java.ext.dirs` system property). 
     It is implemented by the `sun.misc.Launcher$ExtClassLoader` class.
@@ -61,3 +63,15 @@ by default - several classes did not need all permissions - they are de-privileg
   modules (for example `jdk.compiler`, `jdk.javadoc`, `jdk.jshell`)
 * **Before JDK9, the extension and the application class loader were an instance of the
   `java.net.URLClassLoader` class. In JDK9, they are an instance of an internal JDK class**.
+* apart from standard delegation: application -> platform -> bootstrap we have two more:
+    * application -> bootstrap
+    * platform -> application
+* class loading mechanism:
+    1. application class loader needs to load a class
+    1. it searches modules defined to bootstrap and platform (can delegate directly)
+    1. if the module is defined in either bootstrap or platform it is loaded
+    1. if a class is not fined in a named module defined for to bootstrap or platform
+        application delegates loading to platform
+    1. if a class is not loaded, application scans the classpath
+    1. if found - load as a inhabitant of unnamed module
+    1. if not - `ClassNotFoundException`
