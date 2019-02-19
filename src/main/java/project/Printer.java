@@ -11,7 +11,7 @@ class Printer {
         layer.modules().forEach(module -> {
             ClassLoader classLoader = module.getClassLoader();
             String classLoaderName = isNull(classLoader) ? "bootstrap" : classLoader.getName();
-            System.out.println(classLoaderName + ":" + module.getName());
+            System.out.println(classLoaderName + ": " + module.getName());
         });
     }
 }
