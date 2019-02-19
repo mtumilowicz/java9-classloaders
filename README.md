@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/mtumilowicz/java9-classloaders.svg?branch=master)](https://travis-ci.com/mtumilowicz/java9-classloaders)
+
 # java9-classloaders
 
 _Reference_: https://www.amazon.com/Java-Language-Features-Modules-Expressions/dp/1484233476  
