@@ -75,3 +75,55 @@ by default - several classes did not need all permissions - they are de-privileg
     1. if a class is not loaded, application scans the classpath
     1. if found - load as a inhabitant of unnamed module
     1. if not - `ClassNotFoundException`
+    
+# project description
+1. print all modules with classloaders
+    ```
+    ModuleLayer layer = ModuleLayer.boot();
+    layer.modules().forEach(module -> {
+        ClassLoader loader = module.getClassLoader();
+        String loaderName = loader == null ? "bootstrap" : loader.getName();
+        System.out.printf("%s: %s%n", loaderName, module.getName());
+    });
+    ```
+1. output (may differ on different OS)
+    ```
+    platform: jdk.localedata
+    bootstrap: java.base
+    bootstrap: java.security.sasl
+    platform: jdk.zipfs
+    app: jdk.jlink
+    bootstrap: java.xml
+    platform: jdk.crypto.ec
+    platform: jdk.accessibility
+    bootstrap: jdk.management.jfr
+    app: jdk.compiler
+    platform: jdk.naming.dns
+    bootstrap: jdk.management
+    bootstrap: java.naming
+    bootstrap: jdk.naming.rmi
+    platform: java.compiler
+    bootstrap: java.instrument
+    bootstrap: java.rmi
+    app: jdk.internal.opt
+    bootstrap: java.prefs
+    app: jdk.jdeps
+    bootstrap: java.management.rmi
+    platform: jdk.crypto.mscapi
+    app: jdk.jartool
+    platform: java.security.jgss
+    bootstrap: java.management
+    platform: jdk.crypto.cryptoki
+    platform: java.smartcardio
+    platform: jdk.security.jgss
+    bootstrap: java.desktop
+    app: jdk.javadoc
+    platform: jdk.charsets
+    app: jdk.unsupported.desktop
+    app: project // out project
+    platform: jdk.security.auth
+    platform: java.xml.crypto
+    bootstrap: java.logging
+    bootstrap: jdk.jfr
+    bootstrap: java.datatransfer
+    ```
