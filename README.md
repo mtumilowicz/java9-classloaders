@@ -69,8 +69,8 @@ by default - several classes did not need all permissions - they are de-privileg
 * class loading mechanism:
     1. application class loader needs to load a class
     1. it searches modules defined to bootstrap and platform (can delegate directly)
-    1. if the module is defined in either bootstrap or platform it is loaded
-    1. if a class is not fined in a named module defined for to bootstrap or platform
+    1. if the class is found in the module defined to bootstrap or platform it is loaded
+    1. if a class is not found in a named module defined to bootstrap or platform,
         application delegates loading to platform
     1. if a class is not loaded, application scans the classpath
     1. if found - load as a inhabitant of unnamed module
