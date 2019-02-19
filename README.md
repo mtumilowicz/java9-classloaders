@@ -81,9 +81,9 @@ by default - several classes did not need all permissions - they are de-privileg
     ```
     ModuleLayer layer = ModuleLayer.boot();
     layer.modules().forEach(module -> {
-        ClassLoader loader = module.getClassLoader();
-        String loaderName = loader == null ? "bootstrap" : loader.getName();
-        System.out.printf("%s: %s%n", loaderName, module.getName());
+        ClassLoader classLoader = module.getClassLoader();
+        String classLoaderName = isNull(classLoader) ? "bootstrap" : classLoader.getName();
+        System.out.println(classLoaderName + ":" + module.getName());
     });
     ```
 1. output (may differ on different OS)
