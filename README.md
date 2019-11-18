@@ -3,7 +3,8 @@
 # java9-classloaders
 
 _Reference_: https://www.amazon.com/Java-Language-Features-Modules-Expressions/dp/1484233476  
-_Reference_: https://stackoverflow.com/questions/46494112/classloaders-hierarchy-in-java-9
+_Reference_: https://stackoverflow.com/questions/46494112/classloaders-hierarchy-in-java-9  
+_Reference_: [2019 - Krzysztof Chruściel - Kilka wskazówek jak projektować użyteczne interfejsy](https://www.youtube.com/watch?v=-_dhEkdlsew)
 
 # prior JDK 9
 ## definition
@@ -52,7 +53,15 @@ been loaded by another class loader.
 
 _Remark_: The initial class is loaded with the help of public static main() method declared in your class.
 
-## JDK 9
+## phases
+1. loading
+1. linking
+    * verifying
+    * preparing
+    * resolving
+1. initializing
+
+# JDK 9
 * bootstrap class loader is implemented in the library code and in the virtual machine 
 (still represented by `null` in a program - backward compatibility)
 * no longer support for the extension mechanism
@@ -77,7 +86,7 @@ by default - several classes did not need all permissions - they are de-privileg
     1. if a class is not loaded, application scans the classpath
     1. if found - load as a inhabitant of unnamed module
     1. if not - `ClassNotFoundException`
-    
+
 # project description
 1. java 9
     ```
