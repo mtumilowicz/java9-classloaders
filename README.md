@@ -55,13 +55,28 @@ _Remark_: The initial class is loaded with the help of public static main() meth
 
 ## phases
 1. loading
+    * check if classes (`.class`) match JVM specification, have well-defined structure
+        * example - `CAFEBABE` prefix
+    * check java version
+        * example - `invokedynamic` cannot be used with java 6, `UnsupportedVersionException` 
 1. linking
-    * verifying
-    * preparing
-    * resolving
+    * verifying - check if classes are correct, otherwise `VerifyError`
+            * example - accessibility
+        * expensive - spring boot loads thousands of classes - every class have to be verified
+        * `-Xverify:none`, `-noverify`
+    * preparing - default for static fields
+        * example - int -> 0
+        * basic structures for JVM
+    * resolving - constant pool has to become runtime constant pool
+        * optional - we dont need to load everything at once
 1. initializing
+    * static blocks (thread safe)
 
 # JDK 9
+* classes are loaded into off-heap regions
+    * Runtime Constant Pool
+    * ByteCode
+    * Field/Method Data
 * bootstrap class loader is implemented in the library code and in the virtual machine 
 (still represented by `null` in a program - backward compatibility)
 * no longer support for the extension mechanism
