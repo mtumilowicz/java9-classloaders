@@ -57,11 +57,12 @@ _Remark_: The initial class is loaded with the help of public static main() meth
 1. loading
     * check if classes (`.class`) match JVM specification, have well-defined structure
         * example - `CAFEBABE` prefix
+            * windows differs files by extensions (`.exe`), JVM by prefix
     * check java version
         * example - `invokedynamic` cannot be used with java 6, `UnsupportedVersionException` 
 1. linking
     * verifying - check if classes are correct, otherwise `VerifyError`
-            * example - accessibility
+        * example - accessibility
         * expensive - spring boot loads thousands of classes - every class have to be verified
         * `-Xverify:none`, `-noverify`
     * preparing - default for static fields
