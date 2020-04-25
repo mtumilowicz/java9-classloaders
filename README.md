@@ -2,9 +2,11 @@
 
 # java9-classloaders
 
-_Reference_: https://www.amazon.com/Java-Language-Features-Modules-Expressions/dp/1484233476  
-_Reference_: https://stackoverflow.com/questions/46494112/classloaders-hierarchy-in-java-9  
-_Reference_: [2019 - Krzysztof Chruściel - Kilka wskazówek jak projektować użyteczne interfejsy](https://www.youtube.com/watch?v=-_dhEkdlsew)
+* references
+    * https://docs.oracle.com/javase/jndi/tutorial/beyond/misc/classloader.html
+    * https://www.amazon.com/Java-Language-Features-Modules-Expressions/dp/1484233476  
+    * https://stackoverflow.com/questions/46494112/classloaders-hierarchy-in-java-9  
+    * [2019 - Krzysztof Chruściel - Kilka wskazówek jak projektować użyteczne interfejsy](https://www.youtube.com/watch?v=-_dhEkdlsew)
 
 # prior JDK 9
 ## definition
@@ -31,6 +33,14 @@ When the JVM is started, three class loaders are used:
     It is implemented by the `sun.misc.Launcher$ExtClassLoader` class.
 * **System class loader** - loads code found on `java.class.path`, which maps to the `CLASSPATH` environment 
     variable. It is implemented by the `sun.misc.Launcher$AppClassLoader` class.
+    
+### thread classloader context
+* every Thread has a context classloader associated with it (unless it was created by native code)
+* is set via the `Thread.setContextClassLoader()` method
+    * by default thread will inherit its context classloader from its parent Thread
+* the hierarchy of threads is rooted at the primordial thread (the one that runs the program)
+    * the context class loader of the primordial thread is set to the class loader that loaded the application
+    * unless you explicitly change the thread's context class loader, its context class loader will be the application's class loader
 
 ## properies
 `ClassLoader` in Java works on three principle: 
